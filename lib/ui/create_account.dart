@@ -86,9 +86,7 @@ class _CreateAccountState extends State<CreateAccount> {
                          ),
                        ),
                        ElevatedButton(onPressed: (){
-
-                         Validator _objValidator = Validator(email : _emailController.text.toString(),
-                             password: _passwordController.text.toString(),
+                         Validator _objValidator = Validator(email : _emailController.text.toString(), password: _passwordController.text.toString(),
                              confirmPassword: _confirmPasswordController.text.toString());
 
 
