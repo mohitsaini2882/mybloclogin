@@ -23,5 +23,5 @@ class SignupModel {
   String? email;
   SignupModel(String? result){
     email = result;
-    ToastPrinter("Assigned in image = "+ email.toString());
+    //ToastPrinter("Assigned in image = "+ email.toString());
   }}
