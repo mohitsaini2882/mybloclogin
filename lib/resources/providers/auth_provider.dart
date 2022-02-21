@@ -4,6 +4,7 @@ import 'package:mybloclogin/helpers/toast.dart';
 class AuthenticationHelper{
   final FirebaseAuth _auth = FirebaseAuth.instance;
   get user => _auth.currentUser;
+
   //SIGN UP METHOD
   Future signUp({required String email, required String password}) async {
     try {
@@ -44,4 +45,5 @@ class AuthenticationHelper{
       ToastPrinter(msg.toString());
     }
   }
+
 }

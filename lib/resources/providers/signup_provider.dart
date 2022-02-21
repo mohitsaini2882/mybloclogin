@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mybloclogin/helpers/data.dart';
 import 'package:mybloclogin/helpers/local_storage_helper.dart';
 import 'package:mybloclogin/helpers/toast.dart';
 import 'package:mybloclogin/models/signup_model.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:mybloclogin/ui/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mybloclogin/ui/create_account.dart';
 
 class SignUpProvider {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -24,8 +24,8 @@ class SignUpProvider {
         password: password,
       );
       final emailid=_auth.currentUser!.email;
-      ToastPrinter(_auth.currentUser!.email.toString());
-      print("Current User"+_auth.currentUser.toString());
+     /* ToastPrinter(_auth.currentUser!.email.toString());
+      print("Current User"+_auth.currentUser.toString());*/
       //assigning data to signupmodel using obj
       /*_objSignupModel.isSignup = "true";
         _objSignupModel.isError = "false";*/
@@ -36,8 +36,9 @@ class SignUpProvider {
       _localStoreageHelper.addItemsToLocalStorage("isSignup:", "true");
       _localStoreageHelper.addItemsToLocalStorage("isError:", "false");
       _localStoreageHelper.addItemsToLocalStorage("response:", _auth.currentUser.toString());
-
-
+      _localStoreageHelper.addItemsToLocalStorage("currentUser:", _auth.currentUser.toString());
+      _localStoreageHelper.addItemsToLocalStorage("emailId:", _auth.currentUser!.email.toString());
+      _localStoreageHelper.addItemsToLocalStorage("uid:", _auth.currentUser!.uid.toString());
       return SignupModel(emailid);
 
     } on FirebaseAuthException catch (e) {

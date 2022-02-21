@@ -5,6 +5,8 @@ import 'package:mybloclogin/helpers/toast.dart';
 import 'package:mybloclogin/bloc/signup_bloc.dart';
 import 'package:mybloclogin/helpers/validator.dart';
 import 'package:mybloclogin/models/signup_model.dart';
+import 'package:mybloclogin/ui/login_screen.dart';
+import 'package:mybloclogin/ui/user_details.dart';
 class CreateAccount extends StatefulWidget {
   const CreateAccount({Key? key}) : super(key: key);
 
@@ -85,19 +87,30 @@ class _CreateAccountState extends State<CreateAccount> {
                            maxLength: 6,
                          ),
                        ),
-                       ElevatedButton(onPressed: (){
-                         Validator _objValidator = Validator(email : _emailController.text.toString(), password: _passwordController.text.toString(),
+                       ElevatedButton(onPressed: ()async{
+                         Validator _objValidator = await Validator(email : _emailController.text.toString(), password: _passwordController.text.toString(),
                              confirmPassword: _confirmPasswordController.text.toString());
-
-
+                         if(_localStoreageHelper.getitemFromLocalStorage("isSignup:")=="true") {
+                           Navigator.pushReplacement(
+                             context,
+                             MaterialPageRoute(builder: (
+                                 context) => const UserDetails()),
+                           );
+                         }
                          //ToastPrinter("Create Account Run");
                          //_upBloc.SignUpBlocfun(_emailController.text.toString(), _passwordController.text.toString());
                        }, child: const Text("Create Account")),
                        const SizedBox(
-                         height: 55,
+                         height: 12,
                        ),
-                      GestureDetector(
-                          onTap: (){
+                       ElevatedButton(onPressed: ()async{
+                           Navigator.pushReplacement(
+                             context,
+                             MaterialPageRoute(builder: (context) => const Login()),
+                           );
+                       }, child: Text("Login"))
+                      /*GestureDetector(
+                            onTap: (){
                             ToastPrinter("Output Run ");
                             // ToastPrinter(_localStoreageHelper.getitemFromLocalStorage("isSignup:").toString());
                             ToastPrinter(snapshot.data!.email.toString());
@@ -113,7 +126,7 @@ class _CreateAccountState extends State<CreateAccount> {
                                 borderRadius: BorderRadius.circular(12),
                                 color: Colors.blue,
                               ),
-                              child: Text("Show Output",style: TextStyle(color: Colors.white),)))
+                              child: Text("Show Output",style: TextStyle(color: Colors.white),)))*/
                      ],
                    ),
                  );

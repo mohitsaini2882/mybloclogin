@@ -5,7 +5,7 @@ class LocalStoreageHelper{
   void addItemsToLocalStorage(String tag , String value) {
     _objS.setItem(tag, value);
   }
-  String getitemFromLocalStorage(String tag) {
+  String? getitemFromLocalStorage(String tag) {
     final rvalue = _objS.getItem(tag);
     return (rvalue);
   }
