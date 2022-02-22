@@ -16,11 +16,9 @@ class _UserDetailsState extends State<UserDetails> {
   TextEditingController _bioController = new TextEditingController();
   String? FullName,Age,Bio;
   String? UID;
-
-
   //create localstorage obj
   LocalStoreageHelper _localStoreageHelper =LocalStoreageHelper();
-  //create firesore_helper obj
+  //create firestore_helper obj
   FirestoreHelper _firestoreHelper = FirestoreHelper();
   @override
   void dispose(){
@@ -38,7 +36,9 @@ class _UserDetailsState extends State<UserDetails> {
   }
 
   void assignUID()async{
-    String? resultvlaue = _localStoreageHelper.getitemFromLocalStorage("uid:");
+    String? resultvlaue = await _localStoreageHelper.getitemFromLocalStorage("uid:");
+    //PrintToast("assignUID Called and given uid before addwithDoc " + resultvlaue.toString());
+  //  print("assignUID Called and given uid before addwithDoc " + resultvlaue.toString());
     if(resultvlaue!.isNotEmpty){
       UID = resultvlaue;
     }else{
@@ -54,11 +54,9 @@ class _UserDetailsState extends State<UserDetails> {
         "Age": Age,
         "Bio": Bio,
       };
-      _firestoreHelper.addWithDoc(documentUID: UID, tag: "userDetails", yourData: userDetails);
+      await _firestoreHelper.addWithDoc(documentUID: UID, tag: "userDetails", yourData: userDetails);
     }
   }
-
-
 
   //new project
   @override
@@ -125,11 +123,13 @@ class _UserDetailsState extends State<UserDetails> {
                         _localStoreageHelper.addItemsToLocalStorage("fullName:",_fullNameController.text.toString());
                         _localStoreageHelper.addItemsToLocalStorage("age:",_ageController.text.toString());
                         _localStoreageHelper.addItemsToLocalStorage("bio:",_bioController.text.toString());
-
                         FullName = _localStoreageHelper.getitemFromLocalStorage("fullName:");
                         Age =  _localStoreageHelper.getitemFromLocalStorage("age:");
                         Bio = _localStoreageHelper.getitemFromLocalStorage("bio:");
-                        storeData(Fullname: FullName, Age: Age, Bio: Bio);
+                        setState((){
+                          storeData(Fullname: FullName, Age: Age, Bio: Bio);
+                        });
+
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Login()));
                       }, child: const Text("Submit")),
                       const SizedBox(

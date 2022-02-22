@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mybloclogin/helpers/local_storage_helper.dart';
 import 'package:mybloclogin/helpers/loginvalidator.dart';
-import 'package:mybloclogin/helpers/toast.dart';
 import 'package:mybloclogin/ui/create_account.dart';
 import 'package:mybloclogin/ui/home_screen.dart';
 class Login extends StatefulWidget {
@@ -74,7 +73,11 @@ class _LoginState extends State<Login> {
                 }else{
                   //PrintToast("Something Went Wron Try Again!");
                 }
-              }, child: Text("Login")),
+              }, child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/3,
+                  child: Text("Login"))
+              ),
               SizedBox(
                 height: 18,
               ),
@@ -83,7 +86,12 @@ class _LoginState extends State<Login> {
                     context,
                     MaterialPageRoute(builder: (context) => const CreateAccount()),
                   );
-              }, child: Text("Create Account"))
+              }, child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width/3,
+                  child: Text("Create Account")
+              )
+              )
 
             ],
           ),

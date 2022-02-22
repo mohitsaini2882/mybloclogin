@@ -1,4 +1,5 @@
 import 'package:localstorage/localstorage.dart';
+import 'package:mybloclogin/helpers/toast.dart';
 
 class LocalStoreageHelper{
   final LocalStorage _objS = new LocalStorage('localstorage_app');
@@ -11,5 +12,9 @@ class LocalStoreageHelper{
   }
   void deleteitemFormLocalStorage(String tag){
     _objS.deleteItem(tag);
+  }
+  void clearAllData(){
+    _objS.clear();
+    ToastPrinter("Cleared DATA");
   }
 }

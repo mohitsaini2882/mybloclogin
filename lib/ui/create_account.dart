@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mybloclogin/helpers/data.dart';
 import 'package:mybloclogin/helpers/local_storage_helper.dart';
-import 'package:mybloclogin/helpers/toast.dart';
 import 'package:mybloclogin/bloc/signup_bloc.dart';
 import 'package:mybloclogin/helpers/validator.dart';
 import 'package:mybloclogin/models/signup_model.dart';
@@ -90,16 +88,16 @@ class _CreateAccountState extends State<CreateAccount> {
                        ElevatedButton(onPressed: ()async{
                          Validator _objValidator = await Validator(email : _emailController.text.toString(), password: _passwordController.text.toString(),
                              confirmPassword: _confirmPasswordController.text.toString());
-                         if(_localStoreageHelper.getitemFromLocalStorage("isSignup:")=="true") {
-                           Navigator.pushReplacement(
-                             context,
-                             MaterialPageRoute(builder: (
-                                 context) => const UserDetails()),
-                           );
-                         }
-                         //ToastPrinter("Create Account Run");
-                         //_upBloc.SignUpBlocfun(_emailController.text.toString(), _passwordController.text.toString());
-                       }, child: const Text("Create Account")),
+                          Navigator.pushReplacement(
+                           context,
+                           MaterialPageRoute(builder: (
+                               context) => const UserDetails()),
+                          );
+                       }, child: Container(
+                           alignment: Alignment.center,
+                           width: MediaQuery.of(context).size.width/3,
+                           child: Text("Create Account")
+                       )),
                        const SizedBox(
                          height: 12,
                        ),
@@ -108,7 +106,12 @@ class _CreateAccountState extends State<CreateAccount> {
                              context,
                              MaterialPageRoute(builder: (context) => const Login()),
                            );
-                       }, child: Text("Login"))
+                       }, child: Container(
+                           alignment: Alignment.center,
+                           width: MediaQuery.of(context).size.width/3,
+                           child: Text("Login")
+                        )
+                       )
                       /*GestureDetector(
                             onTap: (){
                             ToastPrinter("Output Run ");
